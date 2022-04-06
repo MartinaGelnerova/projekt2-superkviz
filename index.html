@@ -2,22 +2,34 @@
 <html>
 
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Superkvíz</title>
-	<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Superkvíz</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
-	<h1>Superkvíz</h1>
+  <h1>Superkvíz</h1>
 
-	<!-- přidat <div> pro kvíz -->
-	<!-- do něj přidat <div>y pro samotné držení otázky -->
-	<!-- také nezapomenout na <div> pro výsledek a hodnocení -->
-
-	<script src="kviz.js"></script>
+  <div class="kviz">
+    <div id="poradi">Otázka č.</div>
+    <h2 id="otazka">Co je ikonická hračka z 80. let</h2>
+    <div id="moznosti">
+      <div class="foto">
+        <img id="obrazek" src="obrazky/moncicak.jpg" alt="obrazek">
+      </div>
+      <ul id="odpovedi">
+        <li data-odpoved="0">Kočičák</li>
+        <li data-odpoved="1">Mončičák</li>
+        <li data-odpoved="2">Opičák</li>
+      </ul>
+    </div>
+  </div>
+  <script src="kviz.js"></script>
 
 </body>
+
 </html>
