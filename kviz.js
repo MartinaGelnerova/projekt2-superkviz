@@ -26,17 +26,17 @@ let element = null;
 let zvoleneOdpovedi = [];
 let varianty = [];
 
-let i = 0;
+let i = 0
 while (i <= kviz.length - 1) {
   element = kviz[i];
   poradi.innerHTML = `Otázka ${i + 1} / ${kviz.length}`;
   otazka.innerHTML = element.otazka;
   obrazek.src = element.obrazek;
   console.log(otazka.innerHTML);
-  for (i = 0; i <= element.odpovedi.length - 1; i++) {
-    let odpoved = element.odpovedi[i];
+  for (n = 0; n <= element.odpovedi.length - 1; n++) {
+    let odpoved = element.odpovedi[n];
     let novaPolozka = document.createElement('li');
-    novaPolozka.setAttribute("data-odpoved", i);
+    novaPolozka.setAttribute("data-odpoved", n);
     novaPolozka.innerHTML = odpoved;
     document.getElementById("odpovedi").appendChild(novaPolozka);
     console.log(odpoved);
