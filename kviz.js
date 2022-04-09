@@ -24,15 +24,15 @@ let zvoleneOdpovedi = [];
 let varianty = [];
 
 i = 0
-let kvizStranka = document.createElement('div');
-kvizStranka.className = 'kviz';
-document.querySelector('body').appendChild(kvizStranka);
 
 element = kviz[i];
 vykresliOtazku(i, kviz, element);
 aktivujVarianty(i, kviz, element);
 
 function vykresliOtazku(i, kviz, element) {
+  let kvizStranka = document.createElement('div');
+  kvizStranka.className = 'kviz';
+  document.querySelector('body').appendChild(kvizStranka);
   let poradiOtazky = document.createElement('div');
   poradiOtazky.id = 'poradi';
   poradiOtazky.textContent = `Otázka ${i + 1} / ${kviz.length}`;
@@ -62,7 +62,6 @@ function vykresliOtazku(i, kviz, element) {
     novaPolozka.setAttribute("data-odpoved", n);
     novaPolozka.innerHTML = odpoved;
     document.getElementById("odpovedi").appendChild(novaPolozka);
-    console.log(odpoved);
   };
 }
 
@@ -72,9 +71,7 @@ function aktivujVarianty(i, kviz, element) {
     varianta.addEventListener('click', (udalost) => {
       let zvolenaOdpoved = udalost.target.dataset.odpoved;
       zvoleneOdpovedi.push(zvolenaOdpoved);
-      document.querySelector('.kviz').removeChild(document.getElementById('poradi'));
-      document.querySelector('.kviz').removeChild(document.getElementById('otazka'));
-      document.querySelector('.kviz').removeChild(document.getElementById('moznosti'));
+      document.querySelector('body').removeChild(document.querySelector('.kviz'));
       if (i < kviz.length - 1) {
         i++;
         element = kviz[i];
@@ -89,20 +86,27 @@ function aktivujVarianty(i, kviz, element) {
 
 function vykresliVysledky(zvoleneOdpovedi, kviz) {
   let spravnePocet = 0;
+  let vysledkyStranka = document.createElement('div');
+  vysledkyStranka.className = 'vysledek';
+  document.querySelector('body').appendChild(vysledkyStranka);
+  document.querySelector('.vysledek').style.display = true;
   let nadpis = document.createElement('h2');
-  nadpis.id = 'poradi';
+  nadpis.id = 'otazky';
+  nadpis.className = 'obsah';
   nadpis.textContent = `Tvoje hodnocení`;
-  document.querySelector('.kviz').appendChild(nadpis);
-  for (i = 0; i <= kviz.length -1; i++) {
+  document.querySelector('.vysledek').appendChild(nadpis);
+  for (i = 0; i <= kviz.length - 1; i++) {
     element = kviz[i];
-    let otazka = document.createElement('h2');
-    otazka.id = 'otazka';
-    otazka.innerHTML = `${i+1}. ${element.otazka}`;
-    document.querySelector('.kviz').appendChild(otazka);
+    let otazka = document.createElement('div');
+    otazka.id = 'poradi';
+    otazka.className = 'odpovedi obsah';
+    otazka.style.color = 'black';
+    otazka.innerHTML = `${i + 1}. ${element.otazka}`;
+    document.querySelector('.vysledek').appendChild(otazka);
     let odpoved = document.createElement('p');
     odpoved.className = 'odpovedi';
     odpoved.innerHTML = `Tvoje odpověď: ${element.odpovedi[zvoleneOdpovedi[i]]}`;
-    document.querySelector('.kviz').appendChild(odpoved);
+    document.querySelector('.vysledek').appendChild(odpoved);
     let spravne = document.createElement('p');
     spravne.className = 'odpovedi';
     if (zvoleneOdpovedi[i] == element.spravna) {
@@ -111,10 +115,10 @@ function vykresliVysledky(zvoleneOdpovedi, kviz) {
     } else {
       spravne.innerHTML = `Správná odpověd: ${element.odpovedi[element.spravna]}`;
     }
-    document.querySelector('.kviz').appendChild(spravne);
+    document.querySelector('.vysledek').appendChild(spravne);
   }
   let vysledek = document.createElement('h2');
   vysledek.id = 'vysledek';
-  vysledek.textContent = `Správně ${spravnePocet} ze ${kviz.length} otázek. Úspěšnost ${Math.round(spravnePocet/kviz.length*100)}%.`;
-  document.querySelector('.kviz').appendChild(vysledek); 
+  vysledek.textContent = `Správně ${spravnePocet} ze ${kviz.length} otázek. Úspěšnost ${Math.round(spravnePocet / kviz.length * 100)}%.`;
+  document.querySelector('.vysledek').appendChild(vysledek);
 }

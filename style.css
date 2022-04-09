@@ -111,7 +111,7 @@ h1 {
 
 
 .vysledek {
-	display: none;
+	display: true;
 }
 
 .vysledek h2 {
